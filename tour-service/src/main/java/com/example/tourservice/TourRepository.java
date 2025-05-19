@@ -1,8 +1,6 @@
-package com.example.tourservice.utilities;
+package com.example.tourservice;
 
 import java.util.*;
-
-import com.example.tourservice.Tour;
 
 public class TourRepository {
     private final List<Tour> tours = new ArrayList<>();

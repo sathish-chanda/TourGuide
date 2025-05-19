@@ -1,7 +1,5 @@
 package com.example.tourservice;
 
-import com.example.tourservice.utilities.TourRepository;
-
 public class TourManagementService {
     private TourRepository tourRepository;
 
