@@ -1,5 +1,8 @@
 package com.example.tourservice;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class TravelAgentService {
     private  TourRepository tourRepository;
 

@@ -2,6 +2,8 @@ package com.example.tourservice;
 
 import java.util.*;
 
+import org.springframework.stereotype.Repository;
+@Repository
 public class TourRepository {
     private final List<Tour> tours = new ArrayList<>();
 
