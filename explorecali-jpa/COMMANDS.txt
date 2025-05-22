@@ -1,0 +1,13 @@
+We built this project using spring initilizer with the following dependencies. 
+a. Spring Web
+b. Rest Repositories
+c. Spring Data JPA 
+d. H2 Database
+e. Lombok
+
+### BUILD and RUN commands ####
+
+1. cd explorecali-jpa 
+2. mvn clean install ---> to build the project
+3. java -jar target/explorecali-jpa-0.0.1-SNAPSHOT.jar   ---> to run the project
+4. curl localhost:8080 ---> to test if the project is running.
