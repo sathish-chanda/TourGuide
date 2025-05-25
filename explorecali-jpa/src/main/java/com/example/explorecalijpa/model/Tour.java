@@ -60,7 +60,9 @@ public class Tour {
     this.difficulty = difficulty;
     this.region = region;
   }
-  
+
+  protected Tour() {
+  }
 
   public Integer getId() {
     return this.id;
