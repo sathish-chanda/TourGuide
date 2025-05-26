@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -16,7 +17,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootApplication
-public class ExplorecaliJpaApplication {
+public class ExplorecaliJpaApplication implements CommandLineRunner {
 	private final String TOUR_IMPORT_FILE = "ExploreCalifornia.json";
 	
 	@Autowired
@@ -29,6 +30,7 @@ public class ExplorecaliJpaApplication {
 		SpringApplication.run(ExplorecaliJpaApplication.class, args);
 	}
 
+	@Override
 	public void run(String... args) throws Exception {
 		createTourAllPackages();
 		System.out.println("Persisted packages = " + tourPackageService.total());

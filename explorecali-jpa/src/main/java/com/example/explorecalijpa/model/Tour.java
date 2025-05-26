@@ -2,8 +2,6 @@ package com.example.explorecalijpa.model;
 
 import jakarta.persistence.*;
 
-import java.util.Objects;
-
 /*
  * The Tour contains all the attributes of an Explore California Tour.
  * 
