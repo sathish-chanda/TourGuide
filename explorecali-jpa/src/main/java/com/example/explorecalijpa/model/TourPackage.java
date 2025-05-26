@@ -8,10 +8,13 @@ import jakarta.persistence.Table;
 @Table(name="tour_package")
 @Entity
 public class TourPackage {
+  
     @Id
     private String code;
+
     @Column
     private String name;
+
     protected TourPackage() {
     } 
     
