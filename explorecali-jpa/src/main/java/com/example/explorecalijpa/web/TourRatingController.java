@@ -1,9 +1,12 @@
 package com.example.explorecalijpa.web;
 
 import java.util.NoSuchElementException;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.explorecalijpa.business.TourRatingService;
+import com.example.explorecalijpa.model.TourRating;
 
 import jakarta.validation.Valid;
 
@@ -26,8 +30,22 @@ public class TourRatingController {
   
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public void createTourRating(@PathVariable(value = "tourId") int tourId, @RequestBody @Valid RatingDTO ratingDTO) {
-         tourRatingService.createNew(tourId, ratingDTO.getCustomerId(), ratingDTO.getScore(), ratingDTO.getComment()); 
+  public RatingDTO createTourRating(@PathVariable(value = "tourId") int tourId, @RequestBody @Valid RatingDTO ratingDTO) {
+    TourRating tourRating = tourRatingService.createNew(tourId, ratingDTO.getCustomerId(), ratingDTO.getScore(), ratingDTO.getComment());
+    return new RatingDTO(tourRating); 
+  }
+
+  // find all the ratings for the tour
+  @GetMapping
+  public List<RatingDTO> getAllRatingsForTour(@PathVariable(value = "tourId") int tourId) {
+    List<TourRating> tourRatings = tourRatingService.lookupRatings(tourId);
+    return tourRatings.stream().map(RatingDTO::new).toList();
+  }  
+
+  // find the average rating for all the tours
+  @GetMapping("/average")
+  public Map<String, Double> getAverage(@PathVariable(value = "tourId") int tourId) {
+    return Map.of("average",tourRatingService.getAverageScore(tourId));
   }
 
   @ExceptionHandler(NoSuchElementException.class)
