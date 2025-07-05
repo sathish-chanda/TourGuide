@@ -12,7 +12,12 @@ import com.example.explorecalijpa.model.TourRating;
 import com.example.explorecalijpa.repo.TourRatingRepository;
 import com.example.explorecalijpa.repo.TourRepository;
 
+import jakarta.transaction.Transactional; 
+
+import jakarta.validation.ConstraintViolationException;
+
 @Service
+@Transactional
 public class TourRatingService {
     private TourRatingRepository tourRatingRepository;
     private TourRepository tourRepository;
@@ -33,6 +38,9 @@ public class TourRatingService {
      * @return created entity
      */
     public TourRating createNew(int tourId,int customerId,Integer score,String comment) throws NoSuchElementException {
+      if(tourRatingRepository.findByTourIdAndCustomerId(tourId,customerId).isPresent()) {
+        throw new ConstraintViolationException("Unable to create duplicate ratings",null); 
+      }
       return tourRatingRepository.save(new TourRating(verifyTour(tourId),customerId, score, comment));
     }
 
@@ -107,4 +115,14 @@ public class TourRatingService {
       return tourRatingRepository.findByTourIdAndCustomerId(tourId, customerId).orElseThrow(() -> new NoSuchElementException("Tour-Rating pair for request "+ tourId + " for customer " + customerId + " is not found."));
     }
 
+    public void rateMany(int tourId, int score, List<Integer> customers) {
+      Tour tour = verifyTour(tourId);
+      for(Integer cId : customers) {
+        if(tourRatingRepository.findByTourIdAndCustomerId(tourId,cId).isPresent()) {
+           throw new ConstraintViolationException("Unable to create duplicate ratings",null); 
+        }
+        tourRatingRepository.save(new TourRating(tour,cId,score));
+      }
+
+    }
 }
