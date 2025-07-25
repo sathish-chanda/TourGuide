@@ -6,3 +6,5 @@ npm-debug.log
 *.jar
 explorecali-jpa/target
 .idea/
+explorecali-jpa/logs
+explorecali-jpa/logs/myapp.logs
