@@ -11,3 +11,12 @@ e. Lombok
 2. mvn clean install ---> to build the project
 3. java -jar target/explorecali-jpa-0.0.1-SNAPSHOT.jar   ---> to run the project
 4. curl localhost:8080 ---> to test if the project is running.
+
+### Build and run the using the image
+
+1. Add the mvn jib dependencies
+2. mvn jib:dockerBuild [take our application turn into an image]
+3. docker images
+4. docker run -p 8080:8080 explorecali-jpa:0.0.1-SNAPSHOT
+5. open localhost:8080
+6. docker stop containerID
