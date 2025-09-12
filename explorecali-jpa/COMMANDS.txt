@@ -20,3 +20,14 @@ e. Lombok
 4. docker run -p 8080:8080 explorecali-jpa:0.0.1-SNAPSHOT
 5. open localhost:8080
 6. docker stop containerID
+
+### Storing data in persistant storage :: mysql
+1. Update the pom.xml file to have the dependencies spring-boot-docker-compose [This helps to connect containers], mysql-connector-j
+2. Create file compose.yml which will have the configurations of the mysql database.
+3. $ mvn install spring-boot:run
+4. The above command will download and launch the mysql in the background which will be used by the application.
+5. $ docker exec -it mysqlcontainerID mysql -u [root/myuser] -p 
+6. The above command used to connect to mysql database
+7. $ SHOW DATABASES;
+8. $ SHOW TABLES;
+9. $ select * from tour;
