@@ -31,3 +31,9 @@ e. Lombok
 7. $ SHOW DATABASES;
 8. $ SHOW TABLES;
 9. $ select * from tour;
+
+
+### Flywaydb plugin
+1. It maintains the versioning of the tables.
+2. Save the tables only onces and upon restarting the application data will not be added again.
+3. $ mvn install spring-boot:run
