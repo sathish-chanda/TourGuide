@@ -1,27 +1,29 @@
 package com.example.explorecalijpa.model;
 
+/**
+ * Enumeration of the region of California.
+ *
+ * Created by Mary Ellen Bowman
+ */
 public enum Region {
-    Central_Coast("Central Coast"),
-    Southern_Clifornia("Southern California"),
-    North_California("Northern California"),
-    Varies("Varies");
+    Central_Coast("Central Coast"), Southern_California("Southern California"),
+    Northern_California("Northern California"), Varies("Varies");
+    private String label;
 
-    private String name;
-
-    private Region(String name) {
-      this.name = name;
+    private Region(String label) {
+        this.label = label;
     }
 
-    public static Region findByName(String name) {
-        for(Region r : Region.values()) {
-          if(r.name.equalsIgnoreCase(name)) {
-              return r;
-          }
+    public static Region findByLabel(String byLabel) {
+        for (Region r : Region.values()) {
+            if (r.label.equalsIgnoreCase(byLabel)) {
+                return r;
+            }
         }
         return null;
     }
 
-    public String getName() {
-      return name;
+    public String getLabel() {
+        return label;
     }
 }
