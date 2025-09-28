@@ -37,3 +37,13 @@ e. Lombok
 1. It maintains the versioning of the tables.
 2. Save the tables only onces and upon restarting the application data will not be added again.
 3. $ mvn install spring-boot:run
+
+## After using spring security gateway
+0. Mongodb used for storing the images and mysql is used for storing the tour related tables.
+1. RUN explorecali-jpa on port 8082. $cd explorecali-jpa $ SERVER_PORT=8082 mvn install -DskipTests 
+spring-boot:run
+2. Verify the new port is working using the curl command. $ curl https://localhost:8082/tours
+3. Start the gateway on port 8080. $ cd explorecali-gateway $ mvn install spring-boot:run
+4. Verify if get tours is working form port 8080. $ curl https://localhost:8080/tours $ curl https://localhost:8080/packages
+5. $ curl 'http://localhost:8080/packages' -H 'Content-Type: application/json' -d '{"code":"BB", "name":"BeeKeeper"}'
+6. Start the explorecali-images microservice on the port number 8081. $ cd explorecali-images $ SERVER_PORT=8081 mvn install spring-boot:run
