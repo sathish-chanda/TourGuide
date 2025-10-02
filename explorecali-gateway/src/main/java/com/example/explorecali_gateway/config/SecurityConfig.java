@@ -19,7 +19,7 @@ public class    SecurityConfig {
                        .pathMatchers(HttpMethod.PUT, "/**").authenticated()
                        .pathMatchers(HttpMethod.PATCH, "/**").authenticated()
                        .pathMatchers(HttpMethod.DELETE, "/**").authenticated()
-                       .pathMatchers(HttpMethod.GET, "/**").authenticated()
+                       .pathMatchers(HttpMethod.GET, "/**").permitAll()
                )
               .httpBasic(withDefaults())
                .formLogin(withDefaults())
