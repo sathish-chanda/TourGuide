@@ -1,20 +1,18 @@
 spring:
   cloud:
     gateway:
-      server:
-        webflux:
-          routes:
-            - id: tour-route
-              uri: http://localhost:8082
-              predicates:
-                - Path=/tours/**
-            - id: packages-route
-              uri: http://localhost:8082
-              predicates:
-                - Path=/packages/**
-            - id: tour-image-route
-              uri: http://localhost:8081
-              predicates:
-                - Path=/images/**
-              filters:
-                - PrefixPath=/api
+      routes:
+        - id: tour-route
+          uri: http://localhost:8082
+          predicates:
+            - Path=/tours/**
+        - id: packages-route
+          uri: http://localhost:8082
+          predicates:
+            - Path=/packages/**
+        - id: tour-image-route
+          uri: http://localhost:8081
+          predicates:
+            - Path=/images/**
+          filters:
+            - PrefixPath=/api

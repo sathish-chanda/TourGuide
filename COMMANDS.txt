@@ -47,3 +47,14 @@ spring-boot:run
 4. Verify if get tours is working form port 8080. $ curl https://localhost:8080/tours $ curl https://localhost:8080/packages
 5. $ curl 'http://localhost:8080/packages' -H 'Content-Type: application/json' -d '{"code":"BB", "name":"BeeKeeper"}'
 6. Start the explorecali-images microservice on the port number 8081. $ cd explorecali-images $ SERVER_PORT=8081 mvn install spring-boot:run
+
+
+# SecurityConfig 
+
+Acts as security for our application. If we remove permitAll for GET requests then we have to pass the password when requesting for the localhost:8080/packages. Otherwise it would be unautherized and result would be 401 Unautherized.
+$ curl -v -X 'GET' 'http://localhost:8080/packages' -H 'accept: */*' -H 'Content-Type: application/json' -u "user:password"
+
+Where the password will be generated when we run the explorecali-gateway
+$ mvn clean install spring-boot:run -> which generates the password
+like this line: Using generated security password: b4695e99-3035-4a47-a78b-2de640cb1909
+Add this password in the get request to get the results for the localhost:8080/packages.
