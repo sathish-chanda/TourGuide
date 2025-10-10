@@ -63,3 +63,30 @@ Updated SecurityConfig to permit unautherized access for all GET requests
 $ curl -v -X 'GET' 'http://localhost:8080/packages' 
 The above line is going to work. but POST request does not work without password.
 $ curl -v -X 'POST' 'http://localhost:8080/packages' -H 'accept: */*' -H 'Content-Type: application/json' -d '{"code":"BB", "name":"Beekeepers you Betcha"}' -u "user:eb159c8e-16ce-49d1-8bde-47384de674a5"
+
+### Final Release
+#### Goal: Build and Deploy on One Command line
+1. Compile all three microservices
+2. Create Docker images for all three microservices with Jib.
+3. Download the MongoDB image, launch it and confgure it.
+4. Download the MySQL image, launch it and confgure it.
+5. Launch and configure explorecali-images:3.0.0 image, hiding port 8081
+6. Launch and configure explorecali-jpa:3.0.0 image, hiding port 8082
+7. Launch and configure explorecali-gateway:3.0.0 image, exposing port 8080
+
+$ mvn clean compile jib:dockerBuild && docker-compose up
+
+
++--------------------------+---------------------------+---------------------------+---------------------------+
+|    Service(Container)    |            Image          |          Depends On       |           Port            |
++--------------------------+---------------------------+---------------------------+---------------------------+
+|      mongo-db            |          mongo:5.2        |                           |          27017            |
++--------------------------+---------------------------+---------------------------+---------------------------+
+|      mysql-db            |         mysql:latest      |                           |          3306             |
++--------------------------+---------------------------+---------------------------+---------------------------+
+|      mongo-app           |  explorecali-images:3.0.0 |        mongo-db           |        8081 hidden        |
++--------------------------+---------------------------+---------------------------+---------------------------+
+|      jpa-app             |   explorecali-jpa:3.0.0   |        mysql-db           |        8082 hidden        |
++--------------------------+---------------------------+---------------------------+---------------------------+
+|      gateway-app         | explorecali-gateway:3.0.0 |     monogo-app, jpa-app   |           8080            |
++--------------------------+---------------------------+---------------------------+---------------------------+
